@@ -1,8 +1,9 @@
 import scrapy
 from ..items import ProductItem
+from scrapy_redis.spiders import RedisSpider
 
 
-class BreuningerSpider(scrapy.Spider):
+class BreuningerSpider(RedisSpider):
     name = 'breuninger'
     allowed_urls = ['breuninger.com']
     start_urls = [
@@ -17,7 +18,7 @@ class BreuningerSpider(scrapy.Spider):
             '//div[contains(@class,"shop-grid-column")]'
             '/suchen-produkt-stage/suchen-produkt/a/@href'
         ).extract()
-        for url in urls_post:
+        for url in urls_post[:100]:
             yield scrapy.Request('https://www.breuninger.com'+url, callback=self.parse_post)
 
     def parse_post(self, response):

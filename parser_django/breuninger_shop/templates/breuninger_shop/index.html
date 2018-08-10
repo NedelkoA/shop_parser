@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        setTimeout(function() {
+            location.reload();
+        }, 10000);
+    </script>
+</head>
+<body>
+    {% if object_list %}
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Sizes</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+            {% for item in object_list %}
+                <tr><td>{{ item.name }}</td>
+                    <td>{{ item.brand }}</td>
+                    <td width="100">{{ item.size }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.price }}{{ item.currency }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Waiting result...</p>
+    {% endif %}
+</body>
+</html>

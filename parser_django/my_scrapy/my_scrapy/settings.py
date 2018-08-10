@@ -14,6 +14,13 @@ BOT_NAME = 'my_scrapy'
 SPIDER_MODULES = ['my_scrapy.spiders']
 NEWSPIDER_MODULE = 'my_scrapy.spiders'
 
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+ITEM_PIPELINES = {
+    'scrapy_redis.pipelines.RedisPipeline': 300,
+    'my_scrapy.pipelines.MyScrapyPipeline': 100,
+}
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'my_scrapy (+http://www.yourdomain.com)'
